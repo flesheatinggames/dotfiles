@@ -1,0 +1,110 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+#
+# Executes commands at the start of an interactive session.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+# Customize to your needs...
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# .NET
+export DOTNET_ROOT="/opt/homebrew/opt/dotnet/libexec"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/traviswilliams/.lmstudio/bin"
+
+# Task Master aliases added on 6/26/2025
+alias tm='task-master'
+alias taskmaster='task-master'
+
+# Added by Windsurf
+export PATH="/Users/traviswilliams/.codeium/windsurf/bin:$PATH"
+
+#MacTex
+export PATH="PATH=/usr/local/texlive/2025/bin/universal-darwin:$PATH"
+
+# Claude Code
+alias ccp='claude --model opusplan --dangerously-skip-permissions'
+alias ccd='claude --model claude-opus-4-6 --dangerously-skip-permissions'
+
+# Nvim Dev Tmux
+devenv() {
+  local start_dir="${1:-$PWD}"
+  local session_name="main-$(date +%s)"
+  osascript -e 'tell application "iTerm2" to tell current window to set zoomed to true'
+  tmux new-session -d -s "$session_name" -x "$(tput cols)" -y "$(tput lines)" -c "$start_dir"
+  tmux split-window -h -p 30 -c "$start_dir"
+  tmux split-window -v -p 25 -c "$start_dir"
+  tmux select-pane -t 0
+  tmux send-keys -t "$session_name:1.0" 'nvim .' Enter
+  tmux send-keys -t "$session_name:1.1" 'ccd' Enter
+  tmux attach-session -t "$session_name"
+}
+
+# Python
+alias python='python3'
+export DOTNET_ROOT="/opt/homebrew/opt/dotnet/libexec"
+export UV_NATIVE_TLS=1
+
+# Unity CLI Configuration
+export UNITY_PATH="/Applications/Unity/Hub/Editor/6000.1.15f1/Unity.app/Contents/MacOS/Unity"
+export PATH="$PATH:/Applications/Unity/Hub/Editor/6000.1.15f1/Unity.app/Contents/MacOS"
+
+# Unity aliases and functions for Stitch Saga development
+alias unity='$UNITY_PATH'
+alias unity-version='$UNITY_PATH -version'
+
+# Unity compilation checking function
+unity-compile() {
+    local project_path="${1:-$(pwd)}"
+    echo "Checking compilation for project: $project_path"
+    $UNITY_PATH -batchmode -quit -projectPath "$project_path" -logFile - 2>&1 | grep -E "(error|Error|ERROR|CompilerError|compilation failed)"
+    local exit_code=$?
+    if [ $exit_code -eq 1 ]; then
+        echo "✅ No compilation errors found"
+        return 0
+    else
+        echo "❌ Compilation errors detected"
+        return 1
+    fi
+}
+
+# Unity test runner function
+unity-test() {
+    local project_path="${1:-$(pwd)}"
+    local test_mode="${2:-EditMode}"
+    echo "Running Unity tests in $test_mode for project: $project_path"
+    $UNITY_PATH -batchmode -quit -projectPath "$project_path" -runTests -testPlatform "$test_mode" -logFile -
+}
+
+# Unity build function (works with current directory)
+unity-build() {
+    local build_target="${1:-Android}"
+    local project_path="${2:-$(pwd)}"
+    echo "Building Unity project for $build_target platform at: $project_path"
+    $UNITY_PATH -batchmode -quit -projectPath "$project_path" -buildTarget "$build_target" -logFile -
+}
+
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+export PATH="$HOME/.local/bin:$PATH"
