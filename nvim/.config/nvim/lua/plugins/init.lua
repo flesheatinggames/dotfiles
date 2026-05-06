@@ -59,6 +59,38 @@ return {
     end,
   },
 
+
+{
+  "epwalsh/obsidian.nvim",
+  version = "*",
+  lazy = true,
+  ft = "markdown",
+  dependencies = { "nvim-lua/plenary.nvim" },
+  keys = {
+    { "<leader>on", "<cmd>ObsidianNew<cr>", desc = "New note" },
+    { "<leader>oo", "<cmd>ObsidianQuickSwitch<cr>", desc = "Find note" },
+    { "<leader>os", "<cmd>ObsidianSearch<cr>", desc = "Search notes" },
+    { "<leader>od", "<cmd>ObsidianToday<cr>", desc = "Daily note" },
+    { "<leader>ob", "<cmd>ObsidianBacklinks<cr>", desc = "Backlinks" },
+    { "<leader>ot", "<cmd>ObsidianTags<cr>", desc = "Tags" },
+    { "<leader>ol", "<cmd>ObsidianLink<cr>", desc = "Link selection", mode = "v" },
+  },
+  opts = {
+    workspaces = {
+      { name = "notes", path = "~/Notes" },
+    },
+    daily_notes = {
+      folder = "daily",
+      date_format = "%Y-%m-%d",
+    },
+    completion = {
+      nvim_cmp = true,
+    },
+    -- Wiki-style links: [[note name]]
+    -- Type [[ and get autocomplete for existing notes
+  },
+},
+
   -- test new blink
   -- { import = "nvchad.blink.lazyspec" },
 
