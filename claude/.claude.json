@@ -1,5 +1,5 @@
 {
-  "numStartups": 633,
+  "numStartups": 634,
   "installMethod": "native",
   "autoUpdates": false,
   "hasSeenTasksHint": true,
@@ -18,7 +18,7 @@
     "drag-and-drop-images": 630,
     "double-esc": 307,
     "continue": 632,
-    "custom-commands": 596,
+    "custom-commands": 634,
     "shift-tab": 632,
     "custom-agents": 581,
     "git-worktrees": 632,
@@ -797,7 +797,7 @@
       "projectOnboardingSeenCount": 8,
       "hasClaudeMdExternalIncludesApproved": false,
       "hasClaudeMdExternalIncludesWarningShown": false,
-      "lastTotalWebSearchRequests": 11,
+      "lastTotalWebSearchRequests": 0,
       "hasCompletedProjectOnboarding": true,
       "exampleFiles": [
         "admin.ts",
@@ -807,17 +807,17 @@
         "page.tsx"
       ],
       "exampleFilesGeneratedAt": 1778033503632,
-      "lastCost": 12.952381949999996,
-      "lastAPIDuration": 1855019,
-      "lastToolDuration": 769562,
-      "lastDuration": 474691067,
-      "lastLinesAdded": 980,
-      "lastLinesRemoved": 185,
-      "lastTotalInputTokens": 47885,
-      "lastTotalOutputTokens": 74806,
-      "lastTotalCacheCreationInputTokens": 927401,
-      "lastTotalCacheReadInputTokens": 15248139,
-      "lastSessionId": "c988c44d-3d58-4452-96d2-1e05c4b2f183",
+      "lastCost": 2.8385379500000005,
+      "lastAPIDuration": 394224,
+      "lastToolDuration": 74952,
+      "lastDuration": 62895804,
+      "lastLinesAdded": 89,
+      "lastLinesRemoved": 29,
+      "lastTotalInputTokens": 1614,
+      "lastTotalOutputTokens": 22036,
+      "lastTotalCacheCreationInputTokens": 181265,
+      "lastTotalCacheReadInputTokens": 3655067,
+      "lastSessionId": "83eb3291-6d3f-4cb4-bade-374be57016cc",
       "reactVulnerabilityCache": {
         "detected": false,
         "package": null,
@@ -825,47 +825,47 @@
         "version": null,
         "packageManager": null
       },
-      "lastAPIDurationWithoutRetries": 1521060,
+      "lastAPIDurationWithoutRetries": 393736,
       "lastModelUsage": {
         "claude-haiku-4-5-20251001": {
-          "inputTokens": 42776,
-          "outputTokens": 18689,
-          "cacheReadInputTokens": 1749387,
-          "cacheCreationInputTokens": 288576,
-          "webSearchRequests": 11,
-          "costUSD": 0.7818796999999998
+          "inputTokens": 451,
+          "outputTokens": 5874,
+          "cacheReadInputTokens": 785057,
+          "cacheCreationInputTokens": 49513,
+          "webSearchRequests": 0,
+          "costUSD": 0.17021795000000006
         },
         "claude-opus-4-6": {
-          "inputTokens": 5109,
-          "outputTokens": 56117,
-          "cacheReadInputTokens": 13498752,
-          "cacheCreationInputTokens": 638825,
+          "inputTokens": 1163,
+          "outputTokens": 16162,
+          "cacheReadInputTokens": 2870010,
+          "cacheCreationInputTokens": 131752,
           "webSearchRequests": 0,
-          "costUSD": 12.170502249999995
+          "costUSD": 2.668320000000001
         }
       },
       "lastSessionMetrics": {
-        "frame_duration_ms_count": 30921,
-        "frame_duration_ms_min": 0.044749999993655365,
-        "frame_duration_ms_max": 65.99558399990201,
-        "frame_duration_ms_avg": 1.3893447042144935,
-        "frame_duration_ms_p50": 1.179479000158608,
-        "frame_duration_ms_p95": 3.0647223501000544,
-        "frame_duration_ms_p99": 3.904604409961029,
-        "hook_duration_ms_count": 284,
+        "frame_duration_ms_count": 7311,
+        "frame_duration_ms_min": 0.0424580005928874,
+        "frame_duration_ms_max": 17.56033300049603,
+        "frame_duration_ms_avg": 1.0263291570181765,
+        "frame_duration_ms_p50": 0.9553129999694647,
+        "frame_duration_ms_p95": 2.09314374993555,
+        "frame_duration_ms_p99": 4.108102750126269,
+        "hook_duration_ms_count": 106,
         "hook_duration_ms_min": 0,
-        "hook_duration_ms_max": 335,
-        "hook_duration_ms_avg": 75.67957746478874,
-        "hook_duration_ms_p50": 80,
-        "hook_duration_ms_p95": 102,
-        "hook_duration_ms_p99": 147.05000000000263,
-        "pre_tool_hook_duration_ms_count": 176,
+        "hook_duration_ms_max": 213,
+        "hook_duration_ms_avg": 56.41509433962264,
+        "hook_duration_ms_p50": 72,
+        "hook_duration_ms_p95": 109.5,
+        "hook_duration_ms_p99": 113.9,
+        "pre_tool_hook_duration_ms_count": 67,
         "pre_tool_hook_duration_ms_min": 0,
-        "pre_tool_hook_duration_ms_max": 120,
-        "pre_tool_hook_duration_ms_avg": 60.90909090909091,
-        "pre_tool_hook_duration_ms_p50": 85,
-        "pre_tool_hook_duration_ms_p95": 106,
-        "pre_tool_hook_duration_ms_p99": 114
+        "pre_tool_hook_duration_ms_max": 215,
+        "pre_tool_hook_duration_ms_avg": 45.71641791044776,
+        "pre_tool_hook_duration_ms_p50": 1,
+        "pre_tool_hook_duration_ms_p95": 113.69999999999999,
+        "pre_tool_hook_duration_ms_p99": 149.66000000000034
       },
       "disabledMcpServers": [
         "serena",
@@ -874,9 +874,9 @@
         "aim-server",
         "plugin:supabase:supabase"
       ],
-      "lastFpsAverage": 0.84,
-      "lastFpsLow1Pct": 268.02,
-      "lastGracefulShutdown": false,
+      "lastFpsAverage": 0.52,
+      "lastFpsLow1Pct": 247.3,
+      "lastGracefulShutdown": true,
       "lastHintSessionId": "5b133630-6843-4ef1-bdcb-3c6ef4aebb89",
       "lastSessionFirstPrompt": "we're working on the test data management capabilities in this project. assess the current state",
       "lastSessionModified": 1778033536675
@@ -2034,10 +2034,10 @@
       "enabledMcpjsonServers": [],
       "disabledMcpjsonServers": [],
       "hasTrustDialogAccepted": true,
-      "projectOnboardingSeenCount": 1,
+      "projectOnboardingSeenCount": 2,
       "hasClaudeMdExternalIncludesApproved": false,
       "hasClaudeMdExternalIncludesWarningShown": false,
-      "lastGracefulShutdown": true,
+      "lastGracefulShutdown": false,
       "disabledMcpServers": [
         "serena",
         "cbr-retrieval",
@@ -2068,7 +2068,18 @@
         "frame_duration_ms_p50": 1.1629589999974996,
         "frame_duration_ms_p95": 3.8610252000003573,
         "frame_duration_ms_p99": 7.003662000002081
-      }
+      },
+      "exampleFiles": [
+        "init.lua",
+        "chadrc.lua",
+        ".p10k.zsh",
+        "zshrc",
+        "mappings.lua"
+      ],
+      "exampleFilesGeneratedAt": 1778096405872,
+      "lastHintSessionId": "6ee558cb-4404-4abe-9b2a-c4823551be59",
+      "lastSessionFirstPrompt": "why does the `nvim/.config/nvim/lazy-lock.json` file still managed by git? it's in the .gitignore",
+      "lastSessionModified": 1778096436522
     }
   },
   "doctorShownAtSession": 1,
@@ -2079,12 +2090,12 @@
   "hasAvailableSubscription": false,
   "iterm2SetupInProgress": false,
   "iterm2BackupPath": "/Users/traviswilliams/Library/Preferences/com.googlecode.iterm2.plist.bak",
-  "changelogLastFetched": 1778033502019,
+  "changelogLastFetched": 1778096405706,
   "fallbackAvailableWarningThreshold": 0.2,
   "hasIdeOnboardingBeenShown": {
     "vscode": true
   },
-  "lastReleaseNotesSeen": "2.1.126",
+  "lastReleaseNotesSeen": "2.1.129",
   "hasUsedBackslashReturn": true,
   "isQualifiedForDataSharing": false,
   "s1mAccessCache": {
