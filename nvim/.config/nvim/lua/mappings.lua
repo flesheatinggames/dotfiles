@@ -4,6 +4,12 @@ require "nvchad.mappings"
 
 local map = vim.keymap.set
 
+-- Override NvChad's C-h/j/k/l with tmux navigator
+map("n", "<C-h>", "<cmd>TmuxNavigateLeft<cr>", { desc = "Tmux navigate left" })
+map("n", "<C-j>", "<cmd>TmuxNavigateDown<cr>", { desc = "Tmux navigate down" })
+map("n", "<C-k>", "<cmd>TmuxNavigateUp<cr>", { desc = "Tmux navigate up" })
+map("n", "<C-l>", "<cmd>TmuxNavigateRight<cr>", { desc = "Tmux navigate right" })
+
 -- =============================================
 -- Claude Code in a terminal split
 -- =============================================

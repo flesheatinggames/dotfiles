@@ -20,6 +20,8 @@ vim.api.nvim_create_autocmd("FileChangedShellPost", {
   end,
 })
 
+vim.opt.laststatus = 3
+
 -- Development defaults
 o.relativenumber = true
 o.scrolloff = 8

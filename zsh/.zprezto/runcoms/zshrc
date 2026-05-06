@@ -28,6 +28,9 @@ export NVM_DIR="$HOME/.nvm"
 
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+# Prevent Zsh from auto-renaming tmux windows
+export DISABLE_AUTO_TITLE="true"
+
 # .NET
 export DOTNET_ROOT="/opt/homebrew/opt/dotnet/libexec"
 
@@ -45,6 +48,21 @@ export PATH="/Users/traviswilliams/.codeium/windsurf/bin:$PATH"
 export PATH="PATH=/usr/local/texlive/2025/bin/universal-darwin:$PATH"
 
 # Claude Code
+claude() {
+  if [ -n "$TMUX" ]; then
+    tmux set -p -t "$TMUX_PANE" @is_claude 1
+    # This forces the status bar to refresh immediately
+    tmux refresh-client -S
+  fi
+  
+  command claude "$@"
+  
+  if [ -n "$TMUX" ]; then
+    tmux set -p -t "$TMUX_PANE" @is_claude 0
+    tmux refresh-client -S
+  fi
+}
+alias ccd='claude --model claude-3-7-sonnet-latest --dangerously-skip-permissions'
 alias ccp='claude --model opusplan --dangerously-skip-permissions'
 alias ccd='claude --model claude-opus-4-6 --dangerously-skip-permissions'
 
@@ -52,13 +70,24 @@ alias ccd='claude --model claude-opus-4-6 --dangerously-skip-permissions'
 devenv() {
   local start_dir="${1:-$PWD}"
   local session_name="main-$(date +%s)"
+  
   osascript -e 'tell application "iTerm2" to tell current window to set zoomed to true'
+  
   tmux new-session -d -s "$session_name" -x "$(tput cols)" -y "$(tput lines)" -c "$start_dir"
   tmux split-window -h -p 30 -c "$start_dir"
   tmux split-window -v -p 25 -c "$start_dir"
-  tmux select-pane -t 0
-  tmux send-keys -t "$session_name:1.0" 'nvim .' Enter
-  tmux send-keys -t "$session_name:1.1" 'ccd' Enter
+  
+  # Wait 0.2s for Zsh to initialize and source .zshrc
+  sleep 0.2
+  
+  # Pane 0: Nvim
+  tmux send-keys -t "$session_name:1.0" "nvim ." Enter
+  
+  # Pane 1: Claude (Use the function we made earlier)
+  # We don't need 'tmux set -p' here if your .zshrc function is working
+  tmux send-keys -t "$session_name:1.1" "ccd" Enter
+  
+  tmux select-pane -t "$session_name:1.0"
   tmux attach-session -t "$session_name"
 }
 
