@@ -29,4 +29,5 @@ o.signcolumn = "yes"
 o.updatetime = 250       -- faster CursorHold = faster autoread detection
 o.undofile = true
 o.clipboard = "unnamedplus"
+o.conceallevel = 2
 
