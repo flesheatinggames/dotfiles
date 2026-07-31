@@ -30,5 +30,6 @@
   "agentPushNotifEnabled": true,
   "feedbackSurveyState": {
     "lastShownTime": 1753922106843
-  }
+  },
+  "model": "claude-fable-5[1m]"
 }
