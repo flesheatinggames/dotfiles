@@ -23,7 +23,7 @@ vim.api.nvim_create_autocmd("FileChangedShellPost", {
 vim.opt.laststatus = 3
 
 -- Development defaults
-o.relativenumber = true
+o.relativenumber = false
 o.scrolloff = 8
 o.signcolumn = "yes"
 o.updatetime = 250       -- faster CursorHold = faster autoread detection

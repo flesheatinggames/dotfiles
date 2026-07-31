@@ -62,9 +62,17 @@ claude() {
     tmux refresh-client -S
   fi
 }
-alias ccd='claude --model claude-3-7-sonnet-latest --dangerously-skip-permissions'
 alias ccp='claude --model opusplan --dangerously-skip-permissions'
-alias ccd='claude --model claude-opus-4-6 --dangerously-skip-permissions'
+alias ccd='claude --dangerously-skip-permissions'
+
+ccwd() {  # draft mode - local
+  ANTHROPIC_BASE_URL=http://localhost:1234 \
+  ANTHROPIC_AUTH_TOKEN=lmstudio \
+  CLAUDE_CODE_EFFORT_LEVEL=high \
+  CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING=1 \
+  MAX_THINKING_TOKENS=0 \
+  claude --model llama-3.3-70b-instruct --dangerously-skip-permissions
+}
 
 # Nvim Dev Tmux
 devenv() {
@@ -137,3 +145,4 @@ unity-build() {
 
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
 export PATH="$HOME/.local/bin:$PATH"
+export PATH=$PATH:$HOME/.maestro/bin

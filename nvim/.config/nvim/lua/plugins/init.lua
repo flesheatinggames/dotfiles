@@ -12,18 +12,36 @@ return {
       require "configs.lspconfig"
     end,
   },
-
   {
-    "nvim-telescope/telescope.nvim",
-    opts = {
-      pickers = {
-        live_grep = {
-          additional_args = { "--hidden", "--glob", "!.git/", "--smart-case" },
-        },
+    "kylechui/nvim-surround",
+    event = "VeryLazy",
+    opts = {},
+  },
+  {
+  "nvim-telescope/telescope.nvim",
+  opts = {
+    defaults = {
+      vimgrep_arguments = {
+        "rg",
+        "-L",
+        "--color=never",
+        "--no-heading",
+        "--with-filename",
+        "--line-number",
+        "--column",
+        "--smart-case",
+        "--hidden",
+        "--glob", "!.git/",
+      },
+    },
+    pickers = {
+      find_files = {
+        hidden = true,
+        find_command = { "rg", "--files", "--hidden", "--glob", "!.git/" },
       },
     },
   },
-
+},
 -- lua/plugins/init.lua
   {
     "nvim-lualine/lualine.nvim",
