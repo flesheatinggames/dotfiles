@@ -1904,7 +1904,7 @@ def check_blockers(by_kind, items, flagged, path, problems, phase="planned"):
                             f"{blocker_id} in `blocked-by`",
                         )
                     )
-            check_option_effects(node, blocker_id, blocked, items, path, line, problems)
+            check_option_effects(node, blocker_id, blocked, items, path, line, problems, phase)
 
             if node.get("resolution") and phase == "planned":
                 problems.append(
@@ -1952,7 +1952,7 @@ def check_blockers(by_kind, items, flagged, path, problems, phase="planned"):
                 )
 
 
-def check_option_effects(node, blocker_id, blocked, items, path, line, problems):
+def check_option_effects(node, blocker_id, blocked, items, path, line, problems, phase="planned"):
     """Validate the per-option rewrites, and catch conditional outcomes stated in prose.
 
     An option with no ``effect`` means the blocked items execute exactly as written under
@@ -1964,6 +1964,14 @@ def check_option_effects(node, blocker_id, blocked, items, path, line, problems)
     """
     blocked_set = set(blocked)
     covered = {}
+    # The same exemption `asymmetric-block` carries, for the same reason. Every rule below that
+    # compares an effect against an item's *current* state describes the plan as it stood before
+    # the owner answered. Once they have, the chosen option's rewrite is applied to the plan —
+    # stage three's pre-flight refuses to start until it is — and these rules then fire on the
+    # very edit they asked for: `remove-checks` reads as removing a check that is already gone.
+    # Without this, applying a rewrite fails the linter and not applying it fails pre-flight, so
+    # no answered plan can pass both.
+    resolved = bool(node.get("resolution")) and phase in POST_REVIEW_PHASES
 
     for i, option in enumerate(node.get("options") or []):
         if not isinstance(option, dict):
@@ -2005,6 +2013,9 @@ def check_option_effects(node, blocker_id, blocked, items, path, line, problems)
                                 "to rewrite. Keep `drop` alone.",
                             )
                         )
+                continue
+
+            if resolved:
                 continue
 
             for key in effect.get("unset") or []:
