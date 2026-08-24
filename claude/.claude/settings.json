@@ -19,7 +19,9 @@
     "security-guidance@claude-plugins-official": true,
     "supabase@claude-plugins-official": true,
     "context7@claude-plugins-official": false,
-    "frontend-design@claude-plugins-official": true
+    "frontend-design@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true,
+    "code-simplifier@claude-plugins-official": true
   },
   "alwaysThinkingEnabled": true,
   "effortLevel": "xhigh",
@@ -31,5 +33,39 @@
   "feedbackSurveyState": {
     "lastShownTime": 1753922106843
   },
-  "model": "claude-fable-5[1m]"
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/plan-request-guard.sh\" prompt",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "EnterPlanMode",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/plan-request-guard.sh\" clear",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/plan-request-guard.sh\" guard",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
 }
