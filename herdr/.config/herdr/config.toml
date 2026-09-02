@@ -165,6 +165,26 @@ height = "60%"
 # like one thing. Direct chords rather than prefix ones on purpose - that is the
 # whole point, and it matches the tmux bindings in .tmux.conf. The cost is that
 # these keys no longer reach the shell (ctrl+l clear, ctrl+k kill-line).
+# Start or restart this project's dev server / game in a background "run" tab,
+# without stealing focus from the agent pane. Runs the variant last chosen for
+# this project, or the one detected from its build files.
+[[keys.command]]
+key = "prefix+shift+e"
+type = "shell"
+command = "~/.config/herdr/run-project.sh"
+description = "run project (background tab)"
+
+# Same thing, but pick the variant first - the lines of .herdr-run, or type a
+# command. Needs a popup because a detached shell command has no terminal to
+# show fzf in. The choice is remembered, so prefix+shift+e repeats it.
+[[keys.command]]
+key = "prefix+shift+f"
+type = "popup"
+command = "~/.config/herdr/run-project.sh -p"
+description = "run project (pick variant)"
+width = "70%"
+height = "40%"
+
 [[keys.command]]
 key = "ctrl+h"
 type = "plugin_action"
