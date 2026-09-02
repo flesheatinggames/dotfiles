@@ -4,11 +4,12 @@ require "nvchad.mappings"
 
 local map = vim.keymap.set
 
--- Override NvChad's C-h/j/k/l with tmux navigator
-map("n", "<C-h>", "<cmd>TmuxNavigateLeft<cr>", { desc = "Tmux navigate left" })
-map("n", "<C-j>", "<cmd>TmuxNavigateDown<cr>", { desc = "Tmux navigate down" })
-map("n", "<C-k>", "<cmd>TmuxNavigateUp<cr>", { desc = "Tmux navigate up" })
-map("n", "<C-l>", "<cmd>TmuxNavigateRight<cr>", { desc = "Tmux navigate right" })
+-- Override NvChad's C-h/j/k/l with multiplexer-aware navigation. This has to
+-- live here rather than in after/plugin: init.lua defers `require "mappings"`
+-- through vim.schedule, so anything after/plugin sets gets overwritten by
+-- nvchad.mappings above. herdr_nav moves between nvim splits first, then
+-- crosses into herdr panes, falling back to TmuxNavigate* under tmux.
+require "herdr_nav"
 
 -- =============================================
 -- Claude Code in a terminal split

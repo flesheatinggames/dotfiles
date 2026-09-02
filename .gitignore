@@ -5,3 +5,7 @@ nvim/.config/nvim/lazy-lock.json
 
 __pycache__/
 *.pyc
+
+# herdr manages checkouts of GitHub-installed plugins here; they are not ours
+# to version, and each one is its own git repo.
+herdr/.config/herdr/plugins/github/

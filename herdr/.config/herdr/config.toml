@@ -160,6 +160,35 @@ description = "new space from path"
 width = "60%"
 height = "60%"
 
+# vim-herdr-navigation: ctrl+h/j/k/l move between herdr panes, and forward into
+# nvim when the focused pane is running it, so nvim splits and herdr panes feel
+# like one thing. Direct chords rather than prefix ones on purpose - that is the
+# whole point, and it matches the tmux bindings in .tmux.conf. The cost is that
+# these keys no longer reach the shell (ctrl+l clear, ctrl+k kill-line).
+[[keys.command]]
+key = "ctrl+h"
+type = "plugin_action"
+command = "vim-herdr-navigation.left"
+description = "navigate left (vim/herdr)"
+
+[[keys.command]]
+key = "ctrl+j"
+type = "plugin_action"
+command = "vim-herdr-navigation.down"
+description = "navigate down (vim/herdr)"
+
+[[keys.command]]
+key = "ctrl+k"
+type = "plugin_action"
+command = "vim-herdr-navigation.up"
+description = "navigate up (vim/herdr)"
+
+[[keys.command]]
+key = "ctrl+l"
+type = "plugin_action"
+command = "vim-herdr-navigation.right"
+description = "navigate right (vim/herdr)"
+
 
 # Legacy indexed shortcut config is still parsed for compatibility.
 # Prefer switch_tab, switch_workspace, and focus_agent for new configs.
