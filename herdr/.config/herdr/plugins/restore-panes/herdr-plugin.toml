@@ -1,0 +1,12 @@
+id = "local.restore-panes"
+name = "Restore Panes"
+version = "0.1.0"
+min_herdr_version = "0.8.0"
+description = "Relaunch labelled programs in panes that Herdr restored as bare shells"
+platforms = ["macos", "linux"]
+
+# Startup hooks run once per enabled plugin after Herdr restores the session
+# and the API socket is ready, which is exactly when the restored panes exist
+# but are still sitting at empty prompts.
+[[startup]]
+command = ["./restore.sh"]

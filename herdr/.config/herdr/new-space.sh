@@ -76,6 +76,11 @@ bottom=$("$herdr" pane split "$right" --direction down --ratio 0.8 --no-focus \
   | jq -r '.result.pane.pane_id')
 [[ $bottom == null || -z $bottom ]] && die "horizontal split failed"
 
+# The label is what survives a server restart, and it is what the
+# restore-panes plugin looks for to start nvim again. See
+# plugins/restore-panes/.
+"$herdr" pane rename "$root" editor >/dev/null
+
 "$herdr" pane run "$root"  "nvim ." >/dev/null
 "$herdr" pane run "$right" "ccd"    >/dev/null
 # $bottom is left at its shell prompt on purpose - it is the scratch terminal.
