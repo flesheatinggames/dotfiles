@@ -1,6 +1,12 @@
 #!/bin/zsh
-# Create a Herdr space rooted at a path, laid out 50/50 with nvim on the
-# left and ccd on the right.
+# Create a Herdr space rooted at a path, laid out as:
+#
+#   +-------------+-------------+
+#   |             |     ccd     |  80%
+#   |    nvim     +-------------+
+#   |             |  terminal   |  20%
+#   +-------------+-------------+
+#         50%           50%
 #
 #   new-space.sh [path]
 #
@@ -60,12 +66,19 @@ done
 root=$(print -r -- "$created" | jq -r '.result.root_pane.pane_id')
 [[ $root == null || -z $root ]] && die "no root pane in create response"
 
+# --ratio is the share kept by the pane being split, so 0.5 halves the space
+# and 0.8 leaves the bottom pane with 20% of the right-hand column.
 right=$("$herdr" pane split "$root" --direction right --ratio 0.5 --no-focus \
   | jq -r '.result.pane.pane_id')
-[[ $right == null || -z $right ]] && die "split failed"
+[[ $right == null || -z $right ]] && die "vertical split failed"
+
+bottom=$("$herdr" pane split "$right" --direction down --ratio 0.8 --no-focus \
+  | jq -r '.result.pane.pane_id')
+[[ $bottom == null || -z $bottom ]] && die "horizontal split failed"
 
 "$herdr" pane run "$root"  "nvim ." >/dev/null
 "$herdr" pane run "$right" "ccd"    >/dev/null
+# $bottom is left at its shell prompt on purpose - it is the scratch terminal.
 
 # Focus stays on the root (nvim) pane, since the split above used --no-focus.
 # To land in ccd instead, change that --no-focus to --focus.
